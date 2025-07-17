@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
-@Configuration
+//@Configuration
 public class FilterConfig {
     Environment env;
 
@@ -14,7 +14,7 @@ public class FilterConfig {
         this.env = env;
     }
 
-    @Bean
+//    @Bean
     public RouteLocator getRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route(r -> r.path("/first-service/**")
