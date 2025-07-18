@@ -1,6 +1,7 @@
 package com.example.userservice.controller;
 
 import com.example.userservice.dto.UserDto;
+import com.example.userservice.jpa.UserEntity;
 import com.example.userservice.service.UserService;
 import com.example.userservice.vo.Greeting;
 import com.example.userservice.vo.RequestUser;
@@ -32,19 +33,19 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/health-check") // http://localhost:60000/health-check
+    @GetMapping("/health-check")
     public String status() {
         return String.format("It's Working in User Service"
-                + ", port(local.server.port)=" + env.getProperty("local.server.port")
-                + ", port(server.port)=" + env.getProperty("server.port"));
+            + ", port(local.server.port)=" + env.getProperty("local.server.port")
+            + ", port(server.port)=" + env.getProperty("server.port"));
     }
 
     @GetMapping("/welcome")
     public String welcome(HttpServletRequest request) {
         log.info("users.welcome ip: {}, {}, {}, {}", request.getRemoteAddr()
-                , request.getRemoteHost(), request.getRequestURI(), request.getRequestURL());
+            , request.getRemoteHost(), request.getRequestURI(), request.getRequestURL());
 
-//        return env.getProperty("greeting.message");
+        //        return env.getProperty("greeting.message");
         return greeting.getMessage();
     }
 
@@ -59,5 +60,12 @@ public class UserController {
         ResponseUser responseUser = mapper.map(userDto, ResponseUser.class);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity getUsers() {
+        Iterable<UserEntity> userList = userService.getUserByAll();
+
+        return ResponseEntity.status(HttpStatus.OK).body(userList);
     }
 }
