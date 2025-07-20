@@ -41,11 +41,11 @@ public class WebSecurity {
 
 		http.csrf( (csrf) -> csrf.disable())
 			.authorizeHttpRequests(auth -> auth
+				.requestMatchers("/actuator/**").permitAll()
 				.requestMatchers("/h2-console/**").permitAll()  // 특정 경로 허용
 				.requestMatchers("/**").access(
 					new WebExpressionAuthorizationManager(
-						"hasIpAddress('172.30.1.15') or hasIpAddress('::1') or " +
-							"hasIpAddress('172.30.1.15') or hasIpAddress('::1')")) // host pc ip address
+						"hasIpAddress('172.30.1.15') or hasIpAddress('::1')")) // host pc ip address
 				.anyRequest().authenticated()              // 그 외는 인증 필요
 			)
 			.authenticationManager(authenticationManager)

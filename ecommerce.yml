@@ -1,0 +1,5 @@
+token:
+  expiration_time: 86400000
+  secret: user_token
+gateway:
+  ip: 172.30.1.15
