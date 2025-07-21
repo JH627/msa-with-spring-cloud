@@ -14,6 +14,9 @@ spring:
       server:
         git:
           uri: file:\\\C:\Users\2jh627\Desktop\git-local-repo
+      name: ecommerce
+  profiles:
+    active: dev
 
 management:
   endpoints:
