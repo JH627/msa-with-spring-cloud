@@ -1,2 +1,6 @@
 encrypt:
-  key: abafdnskndsfnklandkflnklnalkkldfnsk84489489
+#  key: abafdnskndsfnklandkflnklnalkkldfnsk84489489
+  key-store:
+    location: file:///C:/Users/SSAFY/apiEncryptionKey.jks
+    password: 1q2w3e4r
+    alias: apiEncryptionKey
